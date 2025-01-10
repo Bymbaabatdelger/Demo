@@ -32,4 +32,12 @@
 		background-color: #52525b;
 		border: none;
 	}
+	@media (max-width: 768px) {
+      .container {
+		overflow: scroll;
+		display: flex;
+		gap: 10px;
+		
+	  } 
+	}
 </style>

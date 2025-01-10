@@ -1,98 +1,130 @@
-<script>
-	import Content from './Content.svelte';
-	import Menu from './Menu.svelte';
+<script lang="ts">
 	import Navbar from './Navbar.svelte';
+	import Menu from './Menu.svelte';
+	import Content from './Content.svelte';
+	import Playing from './Playing.svelte';
 
-	let home = './icons/home.svg';
-	let search = './icons/search.svg';
-	let mmusic = './icons/Mmusic.png';
-	let recent = './icons/Recent.svg';
-	let favourite = './icons/Heart.svg';
-	let plus = './icons/plus-circle.svg';
-	let list = './icons/Rectangle8.png';
-	let nice = './icons/Rectangle9.png';
-	let hamburger = './icons/Frame.png';
-
+	let left = './icons/chevron-left.svg';
+	let right = './icons/chevron-right.svg';
+	let hamburger = './icons/Frame.svg';
 	let isSidebarVisible = false;
-
-	const mainMenus = [
-		{ name: 'Нүүр', icon: home },
-		{ name: 'Хайх', icon: search }
-	];
-
-	const myLibraryMenus = [
-		{ name: 'Сүүлд сонссон', icon: recent },
-		{ name: 'Дуртай', icon: favourite },
-		{ name: 'Микс үүсгэх', icon: plus }
-	];
-
-	const playlists = [
-		{ name: 'Муугүй лист', icon: list },
-		{ name: 'Гоё дуунууд', icon: nice }
-	];
 
 	function toggleSidebar() {
 		isSidebarVisible = !isSidebarVisible;
 	}
 </script>
 
-<button class="hamburger" on:click={toggleSidebar} aria-label="Toggle menu"><img src={hamburger} alt="menu"/></button>
-
-<aside class:mobile-hide={!isSidebarVisible} aria-labelledby="main-menu">
-	<nav>
-		<img src={mmusic} alt="Mmusic Logo" />
+<div class="hero">
+	<aside
+		class:mobile-hide={isSidebarVisible}
+		aria-labelledby="main-menu">
+		<nav>
+			<img src="./icons/Mmusic.png" alt="Mmusic Logo" />
+			<div class="container">
+				{#each [{ name: 'Нүүр', icon: './icons/home.svg' }, { name: 'Хайх', icon: './icons/search.svg' }] as menu}
+					<Menu name={menu.name} icon={menu.icon} />
+				{/each}
+			</div>
+		</nav>
+		<p id="main-menu">Миний сан</p>
 		<div class="container">
-			{#each mainMenus as menu}
+			{#each [{ name: 'Сүүлд сонссон', icon: './icons/Recent.svg' }, { name: 'Дуртай', icon: './icons/Heart.svg' }, { name: 'Микс үүсгэх', icon: './icons/plus-circle.svg' }] as menu}
 				<Menu name={menu.name} icon={menu.icon} />
 			{/each}
 		</div>
-	</nav>
-	<p id="main-menu">Миний сан</p>
-	<div class="container">
-		{#each myLibraryMenus as menu}
-			<Menu name={menu.name} icon={menu.icon} />
-		{/each}
-	</div>
-	<hr />
-	<div class="container">
-		{#each playlists as playlist}
-			<Menu name={playlist.name} icon={playlist.icon} />
-		{/each}
-	</div>
-</aside>
+		<hr />
+		<div class="container">
+			{#each [{ name: 'Муугүй лист', icon: './icons/Rectangle8.png' }, { name: 'Гоё дуунууд', icon: './icons/Rectangle9.png' }] as menu}
+				<Menu name={menu.name} icon={menu.icon} />
+			{/each}
+		</div>
+	</aside>
 
-<main>
-	<Navbar />
-	<Content />
-</main>
+	<main>
+		<div class="navbar-container">
+			<button class="hamburger" on:click={toggleSidebar} aria-label="Toggle menu">
+				<img src={hamburger} alt="menu" />
+			</button>
+			<div class="lefticon mobile-hide">
+				<img class="left" src={left} alt="left" />
+				<img class="left" src={right} alt="right" />
+			</div>
+			<Navbar />
+		</div>
+		<Content />
+	</main>
+
+	<div class="playing-container">
+		<Playing />
+	</div>
+</div>
 
 <style>
+	.lefticon {
+		padding-left: 2rem;
+	}
+	.mobile-hide {
+		display: none;
+	}
+
+	.left:hover {
+		filter: brightness(0) saturate(100%) invert(1);
+	}
+	.hero {
+		display: flex;
+		flex-direction: column;
+		width: 100vw;
+		height: 100vh;
+	}
+
 	aside {
 		width: 220px;
-		height: 100vh;
 		background-color: #27272a;
 		position: fixed;
 		left: 0;
 		top: 0;
+		height: 100%;
 		padding: 1rem;
-		display: flex;
-		flex-direction: column;
+		transform: translateX(-100%);
+		transition: transform 0.3s ease-in-out;
 		z-index: 999;
 	}
 
-	aside img {
-		margin-bottom: 40px;
+	aside.mobile-hide {
+		transform: translateX(0);
+	}
+
+	main {
+		flex: 1;
+		padding: 1rem;
+		background-color: #18181b;
+		overflow-y: auto;
+		margin-bottom: 80px; 
+	}
+
+	.navbar-container {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 0.5rem;
+		position: sticky;
+		top: 0;
+		z-index: 1000;
+	}
+
+	.hamburger {
+		background: none;
+		border: none;
+		cursor: pointer;
+		z-index: 1001;
+		display: block;
 	}
 
 	p {
 		color: #525252;
 		font-size: 16px;
-	}
-
-	.container {
-		display: flex;
-		flex-direction: column;
-		gap: 4px;
+		font-family: 'Roboto', sans-serif;
 	}
 
 	hr {
@@ -103,33 +135,35 @@
 		margin: 1rem 0;
 	}
 
-	.container :global(.menu:hover) {
-		background-color: #38383f;
-		border-radius: 4px;
-		cursor: pointer;
+	.playing-container {
+		position: fixed;
+		bottom: 0;
+		width: 100%;
+		height: 80px; 
+		z-index: 1000;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 
-	main {
-		margin-left: 220px;
-		padding: 1rem;
-		background-color: #18181b;
-		min-height: 100vh;
-	}
-	@media (max-width: 768px) {
-		.hamburger {
-			display: block;
-		}
-
-		aside {
-			display: flex;
-		}
-
-		aside.mobile-hide {
-			display: none;
+	@media (min-width: 769px) {
+		.hero {
+			flex-direction: row;
 		}
 
 		main {
-			margin-left: 0;
+			padding-left: 220px;
+		}
+
+		.hamburger {
+			display: none;
+		}
+
+		aside {
+			transform: translateX(0);
+		}
+		.mobile-hide {
+			display: block;
 		}
 	}
 </style>
