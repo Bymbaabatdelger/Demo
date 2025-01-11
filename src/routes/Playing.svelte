@@ -7,29 +7,30 @@
 	let forward = './icons/forwardstep.svg';
 	let line = './icons/timeline.png';
 	let repeat = './icons/repeat_on.png';
-    let repeat_off = './icons/repeat_off.svg';
-    let repeat_on = './icons/repeat_on.svg';
+	let repeat_off = './icons/repeat_off.svg';
+	let repeat_on = './icons/repeat_on.svg';
 	let shuffle = './icons/shuffle.svg';
 	let volume = './icons/volume-up.svg';
 	let meter = './icons/Volumemeter.png';
 	let playlist = './icons/Playlist.svg';
 	let outlinedFav = './icons/Heart.svg';
-    let plus = './icons/plus-circle.png';
-    let repeatIcon = repeat;
-	let favIcon = fav; 
-    let plusIcon = minus
+	let plus = './icons/plus-circle.png';
+	let runner = './icons/Frame14.png';
+	let repeatIcon = repeat;
+	let favIcon = fav;
+	let plusIcon = minus;
 	let isVisible = false;
 
-    function toggleRepeat() {
-		repeatIcon = repeatIcon === repeat ? repeat_off || repeat_on :  repeat; 
+	function toggleRepeat() {
+		repeatIcon = repeatIcon === repeat ? repeat_off || repeat_on : repeat;
 	}
 
 	function toggleFav() {
-		favIcon = favIcon === fav ? outlinedFav : fav; 
+		favIcon = favIcon === fav ? outlinedFav : fav;
 	}
 
-    function togglePlus() {
-		plusIcon = plusIcon === minus ? plus : minus; 
+	function togglePlus() {
+		plusIcon = plusIcon === minus ? plus : minus;
 	}
 </script>
 
@@ -44,9 +45,9 @@
 			<button on:click={toggleFav}>
 				<img src={favIcon} alt="fav" class="clickable-icon" />
 			</button>
-            <button on:click={togglePlus}>
-                <img src={plusIcon} alt="minus"  class="clickable-icon" />
-            </button>
+			<button on:click={togglePlus}>
+				<img src={plusIcon} alt="minus" class="clickable-icon" />
+			</button>
 		</div>
 		<div class="line-container">
 			<img src={back} alt="back" />
@@ -55,9 +56,9 @@
 			<span class="time">02:56</span>
 			<img src={line} alt="line" />
 			<span class="time">03:48</span>
-            <button on:click={toggleRepeat}>
-                <img src={repeatIcon} alt="repeat"  class="clickable-icon" />
-            </button>
+			<button on:click={toggleRepeat}>
+				<img src={repeatIcon} alt="repeat" class="clickable-icon" />
+			</button>
 			<img class="shuffle" src={shuffle} alt="shuffle" />
 		</div>
 		<div class="volume-container">
@@ -68,19 +69,21 @@
 		</div>
 	</div>
 </div>
-
-<div class="phone-container">
-	<div class="songName">
-		<img class="img" src={img} alt="img" />
-		<div class="titles">
-			<span class="song">Нүдэн хээр</span>
-			<span class="mmusic">Дуучин Д.Пэрэнлэйлхагва</span>
+<div class="runner-container">
+	<img src={runner} alt="img" />
+	<div class="phone-container">
+		<div class="songName">
+			<img class="img" src={img} alt="img" />
+			<div class="titles">
+				<span class="song">Нүдэн хээр</span>
+				<span class="mmusic">Дуучин Д.Пэрэнлэйлхагва</span>
+			</div>
 		</div>
-	</div>
-	<div class="controller">
-		<img src={back} alt="back" />
-		<img src={play} alt="play" />
-		<img src={forward} alt="forward" />
+		<div class="controller">
+			<img src={back} alt="back" />
+			<img src={play} alt="play" />
+			<img src={forward} alt="forward" />
+		</div>
 	</div>
 </div>
 
@@ -147,9 +150,13 @@
 		background-color: transparent;
 		border: 0;
 	}
-    .shuffle:hover {
-        filter: brightness(0) saturate(100%) invert(1);
-    }
+	.shuffle:hover {
+		filter: brightness(0) saturate(100%) invert(1);
+	}
+	.runner-container {
+		display: flex;
+		flex-direction: column;
+	}
 	@media (max-width: 768px) {
 		.mobile-hide {
 			display: none;
