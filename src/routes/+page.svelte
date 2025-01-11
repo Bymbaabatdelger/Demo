@@ -12,28 +12,31 @@
 	function toggleSidebar() {
 		isSidebarVisible = !isSidebarVisible;
 	}
+	function closeSidebar() {
+		isSidebarVisible = false;
+	}
 </script>
 
 <div class="hero">
-	<aside
-		class:mobile-hide={isSidebarVisible}
-		aria-labelledby="main-menu">
+	<aside class:visible={isSidebarVisible} aria-labelledby="main-menu">
 		<nav>
-			<img src="./icons/Mmusic.png" alt="Mmusic Logo" />
+			<button class="toggle" on:click={closeSidebar}
+				><img src="./icons/Mmusic.png" alt="Mmusic Logo" /></button
+			>
 			<div class="container">
 				{#each [{ name: 'Нүүр', icon: './icons/home.svg' }, { name: 'Хайх', icon: './icons/search.svg' }] as menu}
 					<Menu name={menu.name} icon={menu.icon} />
 				{/each}
 			</div>
 		</nav>
-		<p id="main-menu">Миний сан</p>
+		<p class="mobile-hide" id="main-menu">Миний сан</p>
 		<div class="container">
 			{#each [{ name: 'Сүүлд сонссон', icon: './icons/Recent.svg' }, { name: 'Дуртай', icon: './icons/Heart.svg' }, { name: 'Микс үүсгэх', icon: './icons/plus-circle.svg' }] as menu}
 				<Menu name={menu.name} icon={menu.icon} />
 			{/each}
 		</div>
-		<hr />
-		<div class="container">
+		<hr class="mobile-hide" />
+		<div class="container mobile-hide">
 			{#each [{ name: 'Муугүй лист', icon: './icons/Rectangle8.png' }, { name: 'Гоё дуунууд', icon: './icons/Rectangle9.png' }] as menu}
 				<Menu name={menu.name} icon={menu.icon} />
 			{/each}
@@ -90,16 +93,17 @@
 		z-index: 999;
 	}
 
-	aside.mobile-hide {
+	aside.visible {
 		transform: translateX(0);
 	}
 
 	main {
 		flex: 1;
-		padding: 1rem;
+		padding-right: 1rem;
+		left: 220px;
 		background-color: #18181b;
 		overflow-y: auto;
-		margin-bottom: 80px; 
+		margin-bottom: 80px;
 	}
 
 	.navbar-container {
@@ -110,7 +114,8 @@
 		padding: 0.5rem;
 		position: sticky;
 		top: 0;
-		z-index: 1000;
+		z-index: 998;
+		background-color: #18181b;
 	}
 
 	.hamburger {
@@ -139,11 +144,15 @@
 		position: fixed;
 		bottom: 0;
 		width: 100%;
-		height: 80px; 
+		height: 80px;
 		z-index: 1000;
 		display: flex;
 		align-items: center;
 		justify-content: center;
+	}
+	.toggle {
+		background-color: transparent;
+		border: 0;
 	}
 
 	@media (min-width: 769px) {

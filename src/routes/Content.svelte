@@ -1,5 +1,6 @@
 <script>
 	import Categories from './Categories.svelte';
+	import Suggests from './Suggests.svelte';
 
 	let banner = './icons/banner.png';
 	let bannersmall = './icons/bannersmall.png';
@@ -10,7 +11,7 @@
 	<img class:mobile-hide={!isBannerVisible} src={banner} alt="banner" />
 	<img class="bannersmall" src={bannersmall} alt="full" />
 	<Categories name="New Hot" />
-	<Categories name="Шинээр нэмэгдсэн" />
+	<Suggests/>
 </div>
 
 <style>
