@@ -156,6 +156,7 @@
 	.runner-container {
 		display: flex;
 		flex-direction: column;
+		display: none;
 	}
 	@media (max-width: 768px) {
 		.mobile-hide {
@@ -176,5 +177,9 @@
 			align-items: center;
 			gap: 10px;
 		}
+		.runner-container {
+		display: flex;
+		flex-direction: column;
+	}
 	}
 </style>

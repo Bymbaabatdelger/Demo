@@ -1,9 +1,9 @@
 <script>
-	let { img, name } = $props();
+	let { img, name , style } = $props();
 </script>
 
 <div>
-	<img src={img} alt="img" />
+	<img style="border-radius: {style};" src={img} alt="img" />
 	<p>{name}</p>
 </div>
 
@@ -12,6 +12,10 @@
 		display: flex;
 		flex-direction: column;
 		gap: 10px;
+	}
+	img {
+		height: 200px;
+		width: 200px;
 	}
 	p {
 		color: #a1a1aa;

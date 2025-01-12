@@ -2,7 +2,7 @@
 	import Card from './Card.svelte';
 	import { tracks } from './tracks';
 
-	let { name } = $props();
+	let { name , style } = $props();
 </script>
 
 <div>
@@ -10,7 +10,7 @@
 	<hr />
 	<div class="container">
 		{#each tracks as track}
-			<Card {...track} />
+			<Card style={style} {...track} />
 		{/each}
 	</div>
 </div>

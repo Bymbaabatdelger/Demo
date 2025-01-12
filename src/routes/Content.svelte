@@ -10,7 +10,8 @@
 <div>
 	<img class:mobile-hide={!isBannerVisible} src={banner} alt="banner" />
 	<img class="bannersmall" src={bannersmall} alt="full" />
-	<Categories name="New Hot" />
+	<Categories style="4px" name="New Hot" />
+	<Categories style="50%" name="Шинэ уран бүтээлч" />
 	<Suggests/>
 </div>
 
